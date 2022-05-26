@@ -2,35 +2,37 @@ const Student = require("../models/student");
 
 // Get All students data
 const getAllStudents = (req, res) => {
-  Student.find().then((data) => {
-    return res.status(200).json({
+  Student.find()
+    .then((data) => {
+      return res.status(200).json({
         message: "Successfully found the students data",
         data: data,
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          message: "Teare was an err to find students data",
-          err: err,
-        });
       });
-  });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message: "Teare was an err to find students data",
+        err: err,
+      });
+    });
 };
 
 // Get a specific student data
 const getStudent = (req, res) => {
   const id = req.params.id;
-  Student.findById(id).then((data) => {
-    return res.status(200).json({
+  Student.findById(id)
+    .then((data) => {
+      return res.status(200).json({
         message: "Successfully found the students data",
         data: data,
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          message: "Teare was an err to find students data",
-          err: err,
-        });
       });
-  });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message: "Teare was an err to find students data",
+        err: err,
+      });
+    });
 };
 
 // Create (post)
@@ -77,7 +79,7 @@ const updateStudent = (req, res) => {
 };
 
 // Delete
-const deleteStudent = () => {
+const deleteStudent = (req, res) => {
   const id = req.params.id;
   Student.findByIdAndDelete({ _id: id })
     .then((data) => {
@@ -98,5 +100,5 @@ module.exports = {
   getStudent,
   createStudent,
   updateStudent,
-  deleteStudent
-}
+  deleteStudent,
+};

@@ -1,19 +1,33 @@
 import React, { useState, Fragment } from "react";
+import axios from 'axios';
 
 const CreateStudentCard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [college, setCollege] = useState("");
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios.post("http://localhost:5000/students", {
+      name,
+      email,
+      phone,
+      college
+    }).then((res) => {
+      alert(res.data.message);
+      console.log(res)
+    }).catch((err) => {
+      console.log(err);
+    })
   };
 
   return (
     <Fragment>
       <div className="w-full h-screen flex flex-col justify-center items-center">
-        <form onSubnit={handleSubmit} className="border-2 border-stone-300 rounded-md flex flex-col justify-center items-center px-5 py-4">
+        <form onSubmit={handleSubmit} className="border-2 border-stone-300 rounded-md flex flex-col justify-center items-center px-5 py-4">
           <label className="block mb-3">Name:
           <input
             type="text"

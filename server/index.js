@@ -18,7 +18,6 @@ mongoose.connect(mongoURL, (err) => {
   }
 })
 
-
 app.get("/", (req, res) => {
   res.send("Hi test CRUD");
 });
