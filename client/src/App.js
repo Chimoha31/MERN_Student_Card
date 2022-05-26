@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StudentAuthContextProvider } from "./components/context/StudentAuthContext";
-import CreateStudentCard from "./components/CreateStudentCard";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignUp from "./components/SignUp";
@@ -20,14 +19,6 @@ const App = () => {
               element={
                 // <ProtectedRoute>
                   <StudentsCardList />
-                // </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/create_card"
-              element={
-                // <ProtectedRoute>
-                  <CreateStudentCard />
                 // </ProtectedRoute>
               }
             />
