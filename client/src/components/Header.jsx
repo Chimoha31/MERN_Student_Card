@@ -8,7 +8,7 @@ const Header = () => {
   }
 
   return (
-  <header className="flex justify-between py-3 px-4 border-2 bg-teal-400 text-gray-600">
+  <header className="flex justify-between py-3 px-4 border-2 bg-teal-500 text-white mb-4">
     <h2>Students Card</h2>
     <button onClick={handleClick}>Logout</button>
   </header>
