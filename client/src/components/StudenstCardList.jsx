@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import CreateButton from "./CreateButton";
 import CreateStudentCard from "./CreateStudentCard";
+import DeleteButton from "./DeleteButton";
 import Header from "./Header";
 
 const StudentsCardList = () => {
@@ -14,11 +15,23 @@ const StudentsCardList = () => {
     axios.get("http://localhost:5000/students").then((res) => {
       setStudentsList(res.data.data);
       console.log(studentsList);
-    });
+    }).catch((err) => {
+      console.log(err);
+    })
     setShow(false);
   };
 
-  useEffect(() => {}, [studentsList]);
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/students/${id}`).then((res) => {
+      console.log("Deleted")
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  useEffect(() => {
+  
+  }, [studentsList]);
 
   return (
     <Fragment>
@@ -29,7 +42,7 @@ const StudentsCardList = () => {
       <div className="flex justify-center flex-wrap gap-5">
         {studentsList.map((student) => (
           <ul
-            className="border border-gray-900 flex flex-col py-2 px-3 w-72 rounded-lg"
+            className="border border-gray-900 flex flex-col py-2 px-3 w-72 rounded-lg shadow-stone-200 shadow-md"
             key={student._id}
           >
             <li className="flex flex-col items-center py-2 px-0">
@@ -57,7 +70,7 @@ const StudentsCardList = () => {
             </li>
             <li className="flex justify-end gap-3">
               <p> ✍🏼</p>
-              <p> 🗑</p>
+              <DeleteButton handleDelete={() => handleDelete(student._id)} />
             </li>
           </ul>
         ))}
