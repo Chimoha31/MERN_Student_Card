@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  return (
-    <div>
-      Header
-    </div>
-  )
-}
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/")
+  }
 
-export default Header
+  return (
+  <header className="flex justify-between py-3 px-4 border-2 bg-teal-400 text-gray-600">
+    <h2>Students Card</h2>
+    <button onClick={handleClick}>Logout</button>
+  </header>
+  );
+};
+
+export default Header;

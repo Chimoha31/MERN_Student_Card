@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <div>
       Login
-      <form>
+      {/* <form>
         <label className="block">
           <span className="block text-sm font-medium text-slate-700">
             Username
@@ -39,7 +39,7 @@ const Login = () => {
             Please provide a valid email address.
           </p>
         </label>
-      </form>
+      </form> */}
       <GoogleButton />
     </div>
   );
