@@ -9,10 +9,11 @@ const StudentsCardList = () => {
   const [studentsList, setStudentsList] = useState([]);
   const [show, setShow] = useState(false);
 
-  const handleClick = (e) => {
+  const handleRefresh = (e) => {
     e.preventDefault();
     axios.get("http://localhost:5000/students").then((res) => {
       setStudentsList(res.data.data);
+      console.log(studentsList);
     });
     setShow(false);
   };
@@ -22,8 +23,8 @@ const StudentsCardList = () => {
   return (
     <Fragment>
       <Header />
-      <div>{show && <CreateStudentCard handleClick={handleClick} setShow={setShow} />}</div>
-      <CreateButton setShow={setShow} />
+      <div>{show && <CreateStudentCard setShow={setShow} />}</div>
+      <CreateButton setShow={setShow} handleRefresh={handleRefresh} />
 
       <div className="flex justify-center flex-wrap gap-5">
         {studentsList.map((student) => (

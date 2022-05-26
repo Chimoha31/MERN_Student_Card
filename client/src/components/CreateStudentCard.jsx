@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 
-const CreateStudentCard = ({ handleClick, setShow }) => {
+const CreateStudentCard = ({ setShow }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -9,7 +9,6 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post("http://localhost:5000/students", {
         name,
@@ -24,6 +23,7 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
       .catch((err) => {
         console.log(err);
       });
+      setShow(false)
   };
 
   const handleHide = () => {
@@ -59,7 +59,7 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm"
+              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm text-stone-900"
               placeholder="Your name"
             />
           </label>
@@ -69,7 +69,7 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm"
+              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm text-stone-900"
               placeholder="your_email@example.com"
             />
           </label>
@@ -79,7 +79,7 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm"
+              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm text-stone-900"
               placeholder="123-456-7890"
             />
           </label>
@@ -89,14 +89,13 @@ const CreateStudentCard = ({ handleClick, setShow }) => {
               type="text"
               value={college}
               onChange={(e) => setCollege(e.target.value)}
-              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm"
+              className="mt-1 block w-64 px-3 py-2 bg-gray-200 border border-gray-500 rounded-md text-md shadow-sm text-stone-900"
               placeholder="Your college name"
             />
           </label>
 
           <button
             className="w-64 bg-sky-500 border border-sky-600 px-5 py-1 rounded-lg text-white shadow-sm"
-            onClick={handleClick}
           >
             Add
           </button>
