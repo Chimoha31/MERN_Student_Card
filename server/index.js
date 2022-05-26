@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const mongoose = require("mongoose");
-require('dotenv').config();
+const StudentRoutes = require("./routes/student")
+const cors = require('cors');
 const PORT = 5000;
+require("dotenv").config();
 
-app.use(express.json())
+app.use(express.json());
 app.use(cors());
 
 const mongoURL = process.env.MONGODB_URL
@@ -21,6 +22,8 @@ mongoose.connect(mongoURL, (err) => {
 app.get("/", (req, res) => {
   res.send("Hi test CRUD");
 });
+
+app.use("/students", StudentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT} 🐣`);

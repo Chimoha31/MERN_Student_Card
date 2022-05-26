@@ -3,9 +3,7 @@ const Student = require("../models/student");
 // Get All students data
 const getAllStudents = (req, res) => {
   Student.find().then((data) => {
-    return res
-      .status(200)
-      .json({
+    return res.status(200).json({
         message: "Successfully found the students data",
         data: data,
       })
@@ -22,9 +20,7 @@ const getAllStudents = (req, res) => {
 const getStudent = (req, res) => {
   const id = req.params.id;
   Student.findById(id).then((data) => {
-    return res
-      .status(200)
-      .json({
+    return res.status(200).json({
         message: "Successfully found the students data",
         data: data,
       })
@@ -97,4 +93,10 @@ const deleteStudent = () => {
     });
 };
 
-
+module.exports = {
+  getAllStudents,
+  getStudent,
+  createStudent,
+  updateStudent,
+  deleteStudent
+}
