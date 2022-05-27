@@ -19,7 +19,7 @@ const App = () => {
               element={
                 // <ProtectedRoute>
                   <StudentsCardList />
-                // </ProtectedRoute>
+                //  </ProtectedRoute>
               }
             />
           </Routes>

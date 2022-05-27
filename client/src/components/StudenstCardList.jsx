@@ -10,33 +10,51 @@ const StudentsCardList = () => {
   const [studentsList, setStudentsList] = useState([]);
   const [show, setShow] = useState(false);
 
-  const handleRefresh = (e) => {
-    e.preventDefault();
-    axios.get("http://localhost:5000/students").then((res) => {
-      setStudentsList(res.data.data);
-      console.log(studentsList);
-    }).catch((err) => {
-      console.log(err);
-    })
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/students/${id}`)
+      .then((res) => {
+        console.log("Deleted");
+        handleRefresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleRefresh = () => {
+    axios
+      .get("http://localhost:5000/students")
+      .then((res) => {
+        setStudentsList(res.data.data);
+        console.log(studentsList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setShow(false);
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/students/${id}`).then((res) => {
-      console.log("Deleted")
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
-
   useEffect(() => {
-  
-  }, [studentsList]);
+    axios
+      .get("http://localhost:5000/students")
+      .then((res) => {
+        setStudentsList(res.data.data);
+        console.log(studentsList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setShow(false);
+  }, []);
 
   return (
     <Fragment>
       <Header />
-      <div>{show && <CreateStudentCard setShow={setShow} />}</div>
+      <div>
+        {show && (
+          <CreateStudentCard setShow={setShow} handleRefresh={handleRefresh} />
+        )}
+      </div>
       <CreateButton setShow={setShow} handleRefresh={handleRefresh} />
 
       <div className="flex justify-center flex-wrap gap-5">

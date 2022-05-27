@@ -1,10 +1,53 @@
 import React from "react";
 import GoogleButton from "react-google-button";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const handleSubmit = () => {
+
+  }
+
   return (
     <div>
-      Login
+      <div className="p-4 flex flex-col justify-center items-center">
+        <h2 className="mb-3">Firebase Auth Login</h2>
+        <form onSubmit={handleSubmit} className="w-64 border bg-blue-50" >
+            <input
+              type="email"
+              placeholder="Email address"
+              className="block"
+              // onChange={(e) => setEmail(e.target.value)}
+              />
+
+            <input
+              type="password"
+              placeholder="Password"
+              className="block"
+              // onChange={(e) => setPassword(e.target.value)}
+            />
+  
+
+          <div className="w-full text-center">
+            <button className="bg-sky-600" variant="primary" type="Submit">
+              Log In
+            </button>
+          </div>
+        </form>
+        <hr />
+        <div>
+          <GoogleButton
+            className=""
+            type="dark"
+            // onClick={handleGoogleSignIn}
+          />
+        </div>
+      </div>
+      <div className="p-4 mt-3 text-center">
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </div>
+
+
+
       {/* <form>
         <label className="block">
           <span className="block text-sm font-medium text-slate-700">
@@ -40,7 +83,6 @@ const Login = () => {
           </p>
         </label>
       </form> */}
-      <GoogleButton />
     </div>
   );
 };
