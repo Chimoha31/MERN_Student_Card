@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,25 +9,27 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const {logIn, googleSiginIn} = useStudentAuth();
+  const {logIn, googleSignIn} = useStudentAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefaault();
+    e.preventDefault();
     setError("");
     try{
       await logIn(email, password)
-      navigate("/students_card");
+      navigate("/students_list");
     }catch(err){
       setError(err.message);
+      alert("Check email or password again")
     }
   };
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await googleSiginIn();
-      navigate("/students_card");
+      console.log("Click")
+      await googleSignIn();
+      navigate("/students_list");
     }catch(err){
       setError(err.message);
     }
@@ -39,7 +41,7 @@ const Login = () => {
       <div className="w-full h-screen p-3 flex flex-col justify-center items-center">
         <div className="w-auto py-4 px-4 md:px-5 shadow-md shadow-stone-400 flex flex-col justify-center items-center border border-r-emerald-200">
           <h2 className="mb-3"> Login</h2>
-          <form onSubmit={handleSubmit} className="">
+          <form onSubmit={handleSubmit}>
             <input
               type="email"
               placeholder="Email address"

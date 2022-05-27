@@ -17,9 +17,9 @@ const App = () => {
             <Route
               path="/students_list"
               element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                   <StudentsCardList />
-                //  </ProtectedRoute>
+                </ProtectedRoute>
               }
             />
           </Routes>
