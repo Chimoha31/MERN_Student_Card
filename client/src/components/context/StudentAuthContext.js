@@ -48,7 +48,7 @@ export const StudentAuthContextProvider = ({ children }) => {
 
 
   return (
-    <studentAuthContext.Provider value={{}}>
+    <studentAuthContext.Provider value={{student, signUp, logIn, logOut, googleSignIn}}>
       {children}
     </studentAuthContext.Provider>
   );
