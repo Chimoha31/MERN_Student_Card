@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 import { useStudentAuth } from "./context/StudentAuthContext";
 
 const ProtectedRoute = ({children}) => {
-  const { user } = useStudentAuth();
+  const { student } = useStudentAuth();
 
-  if (!user) {
+  if (!student) {
     return <Navigate to="/" />;
   }
   return children;

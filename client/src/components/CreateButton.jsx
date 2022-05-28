@@ -1,8 +1,9 @@
 import React from "react";
 
-const CreateButton = ({ setShow, handleRefresh }) => {
+const CreateButton = ({ setShow, setAdd, handleRefresh }) => {
   const handleShow = () => {
     setShow(true);
+    setAdd("Add")
   }
 
   return (

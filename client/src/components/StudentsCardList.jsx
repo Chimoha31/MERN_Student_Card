@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
+import { useStudentAuth } from "./context/StudentAuthContext";
 import CreateButton from "./CreateButton";
 import CreateStudentCard from "./CreateStudentCard";
 import DeleteButton from "./DeleteButton";
@@ -9,6 +10,8 @@ import Header from "./Header";
 const StudentsCardList = () => {
   const [studentsList, setStudentsList] = useState([]);
   const [show, setShow] = useState(false);
+  const [add, setAdd] = useState("Add")
+  const { student } = useStudentAuth();
 
   const handleDelete = (id) => {
     axios
@@ -34,18 +37,20 @@ const StudentsCardList = () => {
       });
     setShow(false);
   };
-  
-  
+
   const handleEdit = (id, data) => {
-    setShow(true)
-    axios.put(`http://localhost:5000/students/${id}`, data)
-    .then((res) => {
-      console.log("Edit btn Clicked")
-      console.log(id);
-      console.log(data);
-    }).catch((err) => {
-      console.log(err);
-    })
+    setShow(true);
+    setAdd("Update");
+    axios
+      .put(`http://localhost:5000/students/${id}`, data)
+      .then((res) => {
+        console.log("Edit btn Clicked");
+        console.log(id);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -59,6 +64,7 @@ const StudentsCardList = () => {
         console.log(err);
       });
     setShow(false);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -66,10 +72,16 @@ const StudentsCardList = () => {
       <Header />
       <div>
         {show && (
-          <CreateStudentCard setShow={setShow} handleRefresh={handleRefresh} />
+          <CreateStudentCard setShow={setShow} handleRefresh={handleRefresh} add={add} />
         )}
       </div>
-      <CreateButton setShow={setShow} handleRefresh={handleRefresh} />
+      <CreateButton setShow={setShow} handleRefresh={handleRefresh} setAdd={setAdd} />
+      {student && (
+        <p className="text-center mt-1 mb-4">
+          Welcome,{" "}
+          <strong className="text-lime-700 text-xl">{student.email}</strong>
+        </p>
+      )}
 
       <div className="flex justify-center flex-wrap gap-5">
         {studentsList.map((student) => (
@@ -101,7 +113,12 @@ const StudentsCardList = () => {
               <p className="mb-0">{student.college}</p>
             </li>
             <li className="flex justify-end gap-3">
-              <p className="cursor-pointer" onClick={() => handleEdit(student._id)}> ✍🏼</p>
+              <p
+                className="cursor-pointer"
+                onClick={() => handleEdit(student._id)}
+              >
+                ✍🏼
+              </p>
               <DeleteButton handleDelete={() => handleDelete(student._id)} />
             </li>
           </ul>

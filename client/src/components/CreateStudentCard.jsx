@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 
-const CreateStudentCard = ({ setShow, handleRefresh }) => {
+const CreateStudentCard = ({ setShow, add, handleRefresh }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -94,12 +94,12 @@ const CreateStudentCard = ({ setShow, handleRefresh }) => {
               placeholder="Your college name"
             />
           </label>
-
           <button
             className="w-64 md:w-80 bg-sky-500 border border-sky-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm"
           >
-            Add
+            {add === "Add" ? "Add" : "Update"}
           </button>
+         
         </form>
       </div>
     </Fragment>

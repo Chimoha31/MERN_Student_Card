@@ -4,7 +4,7 @@ import { StudentAuthContextProvider } from "./components/context/StudentAuthCont
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignUp from "./components/SignUp";
-import StudentsCardList from "./components/StudenstCardList";
+import StudentsCardList from "./components/StudentsCardList";
 
 const App = () => {
   return (
