@@ -8,8 +8,12 @@ import StudentsCardList from "./components/StudentsCardList";
 
 const App = () => {
   const [studentId, setStudentId] = useState("");
+  const [show, setShow] = useState(false);
+
   const getStudentIdHandler = (id) => {
     setStudentId(id);
+    setShow(true)
+    console.log(id);
   };
 
   return (
@@ -23,7 +27,7 @@ const App = () => {
               path="/students_list"
               element={
                 <ProtectedRoute>
-                  <StudentsCardList getStudentIdHandler={getStudentIdHandler} studentId={studentId} setStudentId={setStudentId} />
+                  <StudentsCardList getStudentIdHandler={getStudentIdHandler} studentId={studentId} setStudentId={setStudentId} show={show} setShow={setShow} />
                 </ProtectedRoute>
               }
             />

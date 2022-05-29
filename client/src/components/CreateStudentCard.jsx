@@ -1,51 +1,85 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 
-const CreateStudentCard = ({ setShow, add, getStudents, studentId, setStudentId}) => {
+const CreateStudentCard = ({
+  setShow,
+  add,
+  getStudents,
+  studentId,
+  setStudentId,
+}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [college, setCollege] = useState("");
-  
+  const [message, setMessage] = useState({ error: false, errorMsg: "" });
+
+  const newStudent = {
+    name,
+    email,
+    phone,
+    college,
+  };
 
   const handleSubmit = async (e) => {
-    const newStudent = {
-      name,
-      email,
-      phone, 
-      college
-    }
-    console.log(newStudent);
-
-// try{
-//   if (personId !== "undefined" && personId !== ""){
-
-//   }
-// }
     e.preventDefault();
+    console.log(newStudent);
+    if (studentId !== "undefined" && studentId !== "") {
+      axios
+        .put(`http://localhost:5000/students/${studentId}`, {
+          newStudent,
+        })
+        .then((res) => {
+          alert(res.data.message);
+          console.log(res);
+          studentId("");
+          getStudents();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .post("http://localhost:5000/students", {
+          newStudent,
+        })
+        .then((res) => {
+          alert(res.data.message);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setShow(false);
+    }
+  };
+
+  const handleEdit = () => {
+    setMessage("");
     axios
-      .post("http://localhost:5000/students", {
-        name,
-        email,
-        phone,
-        college,
+      .get(`http://localhost:5000/students/${studentId}`, {
+        newStudent,
       })
       .then((res) => {
         alert(res.data.message);
         console.log(res);
-        getStudents()
+        // getStudents();
       })
       .catch((err) => {
         console.log(err);
       });
-      setShow(false)
   };
 
   const handleHide = () => {
     setShow(false);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (studentId !== "undefined" && studentId !== "") 
+    handleEdit();
+    console.log("Clicked Id", studentId);
+    // eslint-disable-next-line
+  }, [studentId]);
 
   return (
     <Fragment>
@@ -108,12 +142,9 @@ const CreateStudentCard = ({ setShow, add, getStudents, studentId, setStudentId}
               placeholder="Your college name"
             />
           </label>
-          <button
-            className="w-64 md:w-80 bg-sky-500 border border-sky-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm"
-          >
+          <button className="w-64 md:w-80 bg-sky-500 border border-sky-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm">
             {add === "Add" ? "Add" : "Update"}
           </button>
-         
         </form>
       </div>
     </Fragment>

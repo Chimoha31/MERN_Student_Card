@@ -7,9 +7,8 @@ import CreateStudentCard from "./CreateStudentCard";
 import DeleteButton from "./DeleteButton";
 import Header from "./Header";
 
-const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId}) => {
+const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId, show, setShow}) => {
   const [studentsList, setStudentsList] = useState([]);
-  const [show, setShow] = useState(false);
   const [add, setAdd] = useState("Add")
   const { student } = useStudentAuth();
 
@@ -43,21 +42,6 @@ const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId}) => {
       });
     setShow(false);
   };
-
-  // const handleEdit = (id, data) => {
-  //   setShow(true);
-  //   setAdd("Update");
-  //   axios
-  //     .put(`http://localhost:5000/students/${id}`, data)
-  //     .then((res) => {
-  //       console.log("Edit btn Clicked");
-  //       console.log(id);
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
  
 
