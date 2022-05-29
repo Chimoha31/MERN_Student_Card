@@ -7,25 +7,31 @@ import CreateStudentCard from "./CreateStudentCard";
 import DeleteButton from "./DeleteButton";
 import Header from "./Header";
 
-const StudentsCardList = () => {
+const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId}) => {
   const [studentsList, setStudentsList] = useState([]);
   const [show, setShow] = useState(false);
   const [add, setAdd] = useState("Add")
   const { student } = useStudentAuth();
+
+  useEffect(() => {
+    getStudents();
+    // eslint-disable-next-line
+  }, []);
+
 
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/students/${id}`)
       .then((res) => {
         console.log("Deleted");
-        handleRefresh();
+        getStudents();
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleRefresh = () => {
+  const getStudents = () => {
     axios
       .get("http://localhost:5000/students")
       .then((res) => {
@@ -38,47 +44,35 @@ const StudentsCardList = () => {
     setShow(false);
   };
 
-  const handleEdit = (id, data) => {
-    setShow(true);
-    setAdd("Update");
-    axios
-      .put(`http://localhost:5000/students/${id}`, data)
-      .then((res) => {
-        console.log("Edit btn Clicked");
-        console.log(id);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleEdit = (id, data) => {
+  //   setShow(true);
+  //   setAdd("Update");
+  //   axios
+  //     .put(`http://localhost:5000/students/${id}`, data)
+  //     .then((res) => {
+  //       console.log("Edit btn Clicked");
+  //       console.log(id);
+  //       console.log(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/students")
-      .then((res) => {
-        setStudentsList(res.data.data);
-        console.log(studentsList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setShow(false);
-    // eslint-disable-next-line
-  }, []);
+ 
 
   return (
     <Fragment>
       <Header />
       <div>
         {show && (
-          <CreateStudentCard setShow={setShow} handleRefresh={handleRefresh} add={add} />
+          <CreateStudentCard setShow={setShow} add={add} getStudents={getStudents} studentId={studentId} setStudentId={setStudentId} />
         )}
       </div>
-      <CreateButton setShow={setShow} handleRefresh={handleRefresh} setAdd={setAdd} />
+      <CreateButton setShow={setShow} getStudents={getStudents} setAdd={setAdd} />
       {student && (
         <p className="text-center mt-1 mb-4">
-          Welcome,{" "}
+          Welcome,
           <strong className="text-lime-700 text-xl">{student.email}</strong>
         </p>
       )}
@@ -115,7 +109,7 @@ const StudentsCardList = () => {
             <li className="flex justify-end gap-3">
               <p
                 className="cursor-pointer"
-                onClick={() => handleEdit(student._id)}
+                onClick={(e) => getStudentIdHandler(student._id)}
               >
                 ✍🏼
               </p>

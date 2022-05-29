@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateButton = ({ setShow, setAdd, handleRefresh }) => {
+const CreateButton = ({ setShow, setAdd, getStudents }) => {
   const handleShow = () => {
     setShow(true);
     setAdd("Add")
@@ -16,7 +16,7 @@ const CreateButton = ({ setShow, setAdd, handleRefresh }) => {
       </button>
       <button
         className="border-2 px-3 py-1 rounded-md bg-neutral-200 shadow-md shadow-stone-400"
-        onClick={handleRefresh}
+        onClick={getStudents}
       >
         Refresh<i className="fas fa-redo pl-2"></i>
       </button>

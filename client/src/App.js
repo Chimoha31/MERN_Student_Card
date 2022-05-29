@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StudentAuthContextProvider } from "./components/context/StudentAuthContext";
 import Login from "./components/Login";
@@ -7,6 +7,11 @@ import SignUp from "./components/SignUp";
 import StudentsCardList from "./components/StudentsCardList";
 
 const App = () => {
+  const [studentId, setStudentId] = useState("");
+  const getStudentIdHandler = (id) => {
+    setStudentId(id);
+  };
+
   return (
     <div className="font-serif">
       <Router>
@@ -18,7 +23,7 @@ const App = () => {
               path="/students_list"
               element={
                 <ProtectedRoute>
-                  <StudentsCardList />
+                  <StudentsCardList getStudentIdHandler={getStudentIdHandler} studentId={studentId} setStudentId={setStudentId} />
                 </ProtectedRoute>
               }
             />

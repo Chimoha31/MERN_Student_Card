@@ -1,13 +1,27 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 
-const CreateStudentCard = ({ setShow, add, handleRefresh }) => {
+const CreateStudentCard = ({ setShow, add, getStudents, studentId, setStudentId}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [college, setCollege] = useState("");
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    const newStudent = {
+      name,
+      email,
+      phone, 
+      college
+    }
+    console.log(newStudent);
+
+// try{
+//   if (personId !== "undefined" && personId !== ""){
+
+//   }
+// }
     e.preventDefault();
     axios
       .post("http://localhost:5000/students", {
@@ -19,7 +33,7 @@ const CreateStudentCard = ({ setShow, add, handleRefresh }) => {
       .then((res) => {
         alert(res.data.message);
         console.log(res);
-        handleRefresh()
+        getStudents()
       })
       .catch((err) => {
         console.log(err);
@@ -37,7 +51,7 @@ const CreateStudentCard = ({ setShow, add, handleRefresh }) => {
     <Fragment>
       <div
         className="bg-gray-900 w-full h-screen absolute opacity-90 cursor-pointer"
-        onClick={handleHide}
+        onClick={getStudents}
       >
         {/* Modal bg */}
       </div>
