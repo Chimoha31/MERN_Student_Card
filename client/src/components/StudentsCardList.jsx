@@ -28,16 +28,13 @@ const StudentsCardList = ({
   }, []);
 
   const getStudent = (id) => {
+    getStudentIdHandler(id)
+    console.log(studentId);
     setAdd("Update")
     setShow(true);
-    axios.get(`http://localhost:5000/students/${id}`, {
-      name,
-      email,
-      phone, 
-      college
-    }).then((res) => {
-     console.log(res.data.data)
-     return res.data.data
+    axios.get(`http://localhost:5000/students/${id}`).then((res) => {
+      console.log(res.data.data)
+      return res.data.data
     })
     .catch((err) => {
       console.log(err);

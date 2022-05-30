@@ -50,7 +50,7 @@ const CreateStudentCard = ({
         alert(res.data.message);
         console.log("Edit button clicked");
         console.log(res);
-        getStudents();
+        // getStudents();
       })
       .catch((err) => {
         console.log(err);
@@ -133,7 +133,7 @@ const CreateStudentCard = ({
           ) : (
             <button
               className="w-64 md:w-80 bg-red-500 border border-red-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm"
-              // onClick={(e) => handleEdit(student._id)}
+              onClick={() => handleEdit(studentId)}
             >
               Update
             </button>
