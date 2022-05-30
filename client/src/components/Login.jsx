@@ -20,6 +20,7 @@ const Login = () => {
       navigate("/students_list");
     }catch(err){
       setError(err.message);
+      console.LOG(error);
       alert("Check email or password again")
     }
   };

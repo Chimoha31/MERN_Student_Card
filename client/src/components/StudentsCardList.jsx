@@ -1,26 +1,27 @@
+import React, { useEffect, useState, Fragment } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
+import EditButton from "./buttons/EditButton";
 import { useStudentAuth } from "./context/StudentAuthContext";
-import CreateButton from "./CreateButton";
+import CreateButton from "./buttons/CreateButton";
 import CreateStudentCard from "./CreateStudentCard";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "./buttons/DeleteButton";
 import Header from "./Header";
 
-const StudentsCardList = ({
-  getStudentIdHandler,
-  studentId,
-  setStudentId,
-  show,
-  setShow,
-}) => {
+const StudentsCardList = ({ show, setShow }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [college, setCollege] = useState("");
   const [studentsList, setStudentsList] = useState([]);
   const [add, setAdd] = useState("Add");
+  const [studentId, setStudentId] = useState("");
   const { student } = useStudentAuth();
+
+  const getStudentIdHandler = (id) => {
+    setStudentId(id);
+    setShow(true);
+    console.log(id);
+  };
 
   useEffect(() => {
     getStudents();
@@ -50,18 +51,6 @@ const StudentsCardList = ({
       });
   };
 
-  const handleDelete = async (id) => {
-    axios
-      .delete(`http://localhost:5000/students/${id}`)
-      .then((res) => {
-        console.log("Deleted");
-        getStudents();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const getStudents = () => {
     axios
       .get("http://localhost:5000/students")
@@ -77,6 +66,18 @@ const StudentsCardList = ({
     setEmail("");
     setPhone("");
     setCollege("");
+  };
+
+  const handleDelete = async (id) => {
+    axios
+      .delete(`http://localhost:5000/students/${id}`)
+      .then((res) => {
+        console.log("Deleted");
+        getStudents();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -145,12 +146,7 @@ const StudentsCardList = ({
               <p className="mb-0">{student.college}</p>
             </li>
             <li className="flex justify-end gap-3">
-              <p
-                className="cursor-pointer"
-                onClick={() => getStudent(student._id)}
-              >
-                ✍🏼
-              </p>
+              <EditButton getStudent={() => getStudent(student._id)} />
               <DeleteButton handleDelete={() => handleDelete(student._id)} />
             </li>
           </ul>

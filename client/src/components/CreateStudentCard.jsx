@@ -83,12 +83,12 @@ const CreateStudentCard = ({
     <Fragment>
       <div
         className="bg-gray-900 w-full h-screen absolute opacity-90 cursor-pointer"
-        onClick={getStudents}
+        onClick={handleHide}
       >
         {/* Modal bg */}
       </div>
 
-      <div className="w-full h-auto flex flex-col justify-center items-center mb-5">
+      <div className="w-full h-auto flex flex-col justify-center items-center mb-5" >
         {add === "Add" ? (
           <AddForm name={name} setName={setName} email={email} setEmail={setEmail} phone={phone} setPhone={setPhone} college={college} setCollege={setCollege} handleSubmit={handleSubmit} handleHide={handleHide} />
         ) : (
