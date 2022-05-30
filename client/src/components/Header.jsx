@@ -4,7 +4,7 @@ import { useStudentAuth } from "./context/StudentAuthContext";
 
 const Header = () => {
   const [error, setError] = useState("");
-  const {student, logOut} = useStudentAuth();
+  const {logOut} = useStudentAuth();
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
@@ -14,6 +14,7 @@ const Header = () => {
       navigate("/");
     }catch(err) {
       setError(err.message);
+      console.log(error);
     }
   };
 

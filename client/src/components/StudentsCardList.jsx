@@ -33,11 +33,11 @@ const StudentsCardList = ({
     setAdd("Update");
     setShow(true);
     axios
-      .get(`http://localhost:5000/students/${id}`,{
+      .get(`http://localhost:5000/students/${id}`, {
         name,
         email,
         phone,
-        college
+        college,
       })
       .then((res) => {
         setName(res.data.data.name);
@@ -50,7 +50,7 @@ const StudentsCardList = ({
       });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     axios
       .delete(`http://localhost:5000/students/${id}`)
       .then((res) => {
@@ -73,6 +73,10 @@ const StudentsCardList = ({
         console.log(err);
       });
     setShow(false);
+    setName("");
+    setEmail("");
+    setPhone("");
+    setCollege("");
   };
 
   return (
