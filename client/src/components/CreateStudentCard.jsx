@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import axios from "axios";
 
 const CreateStudentCard = ({
@@ -7,63 +7,50 @@ const CreateStudentCard = ({
   getStudents,
   studentId,
   setStudentId,
+  name,
+  setName,
+  email,
+  setEmail,
+  phone,
+  setPhone,
+  college,
+  setCollege,
+  getStudentIdHandler
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [college, setCollege] = useState("");
-  const [message, setMessage] = useState({ error: false, errorMsg: "" });
-
-  const newStudent = {
-    name,
-    email,
-    phone,
-    college,
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(newStudent);
-    if (studentId !== "undefined" && studentId !== "") {
-      axios
-        .put(`http://localhost:5000/students/${studentId}`, {
-          newStudent,
-        })
-        .then((res) => {
-          alert(res.data.message);
-          console.log(res);
-          studentId("");
-          getStudents();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axios
-        .post("http://localhost:5000/students", {
-          newStudent,
-        })
-        .then((res) => {
-          alert(res.data.message);
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setShow(false);
-    }
-  };
-
-  const handleEdit = () => {
-    setMessage("");
     axios
-      .get(`http://localhost:5000/students/${studentId}`, {
-        newStudent,
+      .post("http://localhost:5000/students", {
+        name,
+        email,
+        phone,
+        college,
       })
       .then((res) => {
         alert(res.data.message);
+        getStudents();
         console.log(res);
-        // getStudents();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setShow(false);
+  };
+
+  const handleEdit = (id) => {
+    console.log("Clicked")
+    axios
+      .put(`http://localhost:5000/students/${id}`, {
+        name,
+        email,
+        phone,
+        college
+      })
+      .then((res) => {
+        alert(res.data.message);
+        console.log("Edit button clicked");
+        console.log(res);
+        getStudents();
       })
       .catch((err) => {
         console.log(err);
@@ -75,9 +62,6 @@ const CreateStudentCard = ({
   };
 
   useEffect(() => {
-    if (studentId !== "undefined" && studentId !== "") 
-    handleEdit();
-    console.log("Clicked Id", studentId);
     // eslint-disable-next-line
   }, [studentId]);
 
@@ -142,9 +126,18 @@ const CreateStudentCard = ({
               placeholder="Your college name"
             />
           </label>
-          <button className="w-64 md:w-80 bg-sky-500 border border-sky-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm">
-            {add === "Add" ? "Add" : "Update"}
-          </button>
+          {add === "Add" ? (
+            <button className="w-64 md:w-80 bg-sky-500 border border-sky-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm">
+              Add
+            </button>
+          ) : (
+            <button
+              className="w-64 md:w-80 bg-red-500 border border-red-600 md:mb-5 px-5 py-1 rounded-lg text-white shadow-sm"
+              // onClick={(e) => handleEdit(student._id)}
+            >
+              Update
+            </button>
+          )}
         </form>
       </div>
     </Fragment>

@@ -7,9 +7,19 @@ import CreateStudentCard from "./CreateStudentCard";
 import DeleteButton from "./DeleteButton";
 import Header from "./Header";
 
-const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId, show, setShow}) => {
+const StudentsCardList = ({
+  getStudentIdHandler,
+  studentId,
+  setStudentId,
+  show,
+  setShow,
+}) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [college, setCollege] = useState("");
   const [studentsList, setStudentsList] = useState([]);
-  const [add, setAdd] = useState("Add")
+  const [add, setAdd] = useState("Add");
   const { student } = useStudentAuth();
 
   useEffect(() => {
@@ -17,6 +27,22 @@ const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId, show, s
     // eslint-disable-next-line
   }, []);
 
+  const getStudent = (id) => {
+    setAdd("Update")
+    setShow(true);
+    axios.get(`http://localhost:5000/students/${id}`, {
+      name,
+      email,
+      phone, 
+      college
+    }).then((res) => {
+     console.log(res.data.data)
+     return res.data.data
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
 
   const handleDelete = (id) => {
     axios
@@ -43,17 +69,35 @@ const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId, show, s
     setShow(false);
   };
 
- 
-
   return (
     <Fragment>
       <Header />
       <div>
         {show && (
-          <CreateStudentCard setShow={setShow} add={add} getStudents={getStudents} studentId={studentId} setStudentId={setStudentId} />
+          <CreateStudentCard
+            setShow={setShow}
+            add={add}
+            aetAdd={setAdd}
+            getStudents={getStudents}
+            studentId={studentId}
+            setStudentId={setStudentId}
+            name={name}
+            setName={setName}
+            email={email}
+            setEmail={setEmail}
+            phone={phone}
+            setPhone={setPhone}
+            college={college}
+            setCollege={setCollege}
+            getStudentIdHandler={getStudentIdHandler}
+          />
         )}
       </div>
-      <CreateButton setShow={setShow} getStudents={getStudents} setAdd={setAdd} />
+      <CreateButton
+        setShow={setShow}
+        getStudents={getStudents}
+        setAdd={setAdd}
+      />
       {student && (
         <p className="text-center mt-1 mb-4">
           Welcome,
@@ -91,10 +135,7 @@ const StudentsCardList = ({getStudentIdHandler, studentId, setStudentId, show, s
               <p className="mb-0">{student.college}</p>
             </li>
             <li className="flex justify-end gap-3">
-              <p
-                className="cursor-pointer"
-                onClick={(e) => getStudentIdHandler(student._id)}
-              >
+              <p className="cursor-pointer" onClick={() => getStudent(student._id)} >
                 ✍🏼
               </p>
               <DeleteButton handleDelete={() => handleDelete(student._id)} />
