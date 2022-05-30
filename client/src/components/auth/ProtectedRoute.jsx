@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useStudentAuth } from "./context/StudentAuthContext";
+import { useStudentAuth } from "../context/StudentAuthContext";
 
 const ProtectedRoute = ({children}) => {
   const { student } = useStudentAuth();

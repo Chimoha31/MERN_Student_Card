@@ -1,47 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
-import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
-import { useStudentAuth } from "./context/StudentAuthContext";
-import Header from "./Header";
+import { useStudentAuth } from "../context/StudentAuthContext";
+import Header from "../Header";
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const {logIn, googleSignIn} = useStudentAuth();
+  const { signUp } = useStudentAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    try{
-      await logIn(email, password)
-      navigate("/students_list");
-    }catch(err){
+    try {
+      await signUp(email, password);
+      navigate("/");
+    } catch (err) {
       setError(err.message);
-      console.LOG(error);
-      alert("Check email or password again")
+      console.log(error);
     }
   };
 
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      console.log("Click")
-      await googleSignIn();
-      navigate("/students_list");
-    }catch(err){
-      setError(err.message);
-    }
-  }
+  useEffect(() => {}, []);
 
   return (
     <Fragment>
       <Header />
-      <div className="w-full h-screen p-3 flex flex-col justify-center items-center">
+      <div className="w-full h-screen p-4 flex flex-col justify-center items-center">
         <div className="w-auto py-4 px-4 md:px-5 shadow-md shadow-stone-400 flex flex-col justify-center items-center border border-r-emerald-200">
-          <h2 className="mb-3"> Login</h2>
+          <h2 className="mb-3">Sign Up</h2>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -63,28 +52,18 @@ const Login = () => {
                 variant="primary"
                 type="Submit"
               >
-                Log In
+                Sign Up
               </button>
             </div>
           </form>
-
-          <hr className="border border-stone-900 w-72" />
-
-          <div>
-            <GoogleButton
-              className="!w-72"
-              type="dark"
-              onClick={handleGoogleSignIn}
-            />
-          </div>
         </div>
 
         <div className="p-4 mt-3 text-center">
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Already have an account? <Link to="/">Login</Link>
         </div>
       </div>
     </Fragment>
   );
 };
 
-export default Login;
+export default SignUp;
