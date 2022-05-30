@@ -50,7 +50,6 @@ const CreateStudentCard = ({
         alert(res.data.message);
         console.log("Edit button clicked");
         console.log(res);
-        // getStudents();
       })
       .catch((err) => {
         console.log(err);
@@ -59,6 +58,10 @@ const CreateStudentCard = ({
 
   const handleHide = () => {
     setShow(false);
+    setName("")
+    setEmail("")
+    setPhone("")
+    setCollege("")
   };
 
   useEffect(() => {

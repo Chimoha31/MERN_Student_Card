@@ -73,10 +73,6 @@ const StudentsCardList = ({
         console.log(err);
       });
     setShow(false);
-    setName("")
-    setEmail("")
-    setPhone("")
-    setCollege("")
   };
 
   return (
