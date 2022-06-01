@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const StudentRoutes = require("./routes/student")
 const cors = require('cors');
-const PORT =  process.env.PORT || 5000;
+const PORT =  process.env.PORT || 4000;
 require("dotenv").config();
 
 app.use(express.json());
