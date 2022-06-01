@@ -3,8 +3,8 @@ import React from "react";
 const CreateButton = ({ setShow, setAdd, getStudents }) => {
   const handleShow = () => {
     setShow(true);
-    setAdd("Add")
-  }
+    setAdd("Add");
+  };
 
   return (
     <div className="w-full p-4">
@@ -13,12 +13,6 @@ const CreateButton = ({ setShow, setAdd, getStudents }) => {
         onClick={handleShow}
       >
         Add Student<i className="fas fa-user-plus pl-2"></i>
-      </button>
-      <button
-        className="border-2 px-3 py-1 rounded-md bg-neutral-200 shadow-md shadow-stone-400"
-        onClick={getStudents}
-      >
-        Refresh<i className="fas fa-redo pl-2"></i>
       </button>
     </div>
   );
