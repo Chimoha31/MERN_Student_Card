@@ -30,7 +30,7 @@ const SignUp = () => {
       <Header />
       <div className="w-full h-screen p-4 flex flex-col justify-center items-center">
         <div className="w-auto py-4 px-4 md:px-5 shadow-md shadow-stone-400 flex flex-col justify-center items-center border border-r-emerald-200">
-          <h2 className="mb-3">Sign Up</h2>
+          <h2 className="mb-4 text-2xl">Sign Up</h2>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -59,7 +59,7 @@ const SignUp = () => {
         </div>
 
         <div className="p-4 mt-3 text-center">
-          Already have an account? <Link to="/">Login</Link>
+          Already have an account? <Link to="/" className="text-blue-600">Login</Link>
         </div>
       </div>
     </Fragment>

@@ -41,7 +41,7 @@ const Login = () => {
       <Header />
       <div className="w-full h-screen p-3 flex flex-col justify-center items-center">
         <div className="w-auto py-4 px-4 md:px-5 shadow-md shadow-stone-400 flex flex-col justify-center items-center border border-r-emerald-200">
-          <h2 className="mb-3"> Login</h2>
+          <h2 className="mb-4 text-2xl"> Login</h2>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -68,7 +68,7 @@ const Login = () => {
             </div>
           </form>
 
-          <hr className="border border-stone-900 w-72" />
+          <hr className="border border-stone-300 w-72 my-3" />
 
           <div>
             <GoogleButton
@@ -80,7 +80,7 @@ const Login = () => {
         </div>
 
         <div className="p-4 mt-3 text-center">
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Don't have an account? <Link to="/signup" className="text-blue-600">Sign up</Link>
         </div>
       </div>
     </Fragment>

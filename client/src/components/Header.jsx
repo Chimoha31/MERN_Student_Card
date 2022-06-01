@@ -19,10 +19,10 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between py-3 px-4 border-2 bg-teal-500 text-white relative">
-      <h2>Students Card</h2>
+    <header className="flex justify-between px-4 py-4 border-2 bg-teal-500 text-white relative">
+      <h2 className="text-2xl">Students Card</h2>
       <div className="flex gap-5">
-        <button onClick={handleLogOut}>Logout </button>
+        <button onClick={handleLogOut} className="text-lg">Logout </button>
       </div>
     </header>
   );
