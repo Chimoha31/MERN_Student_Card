@@ -8,7 +8,7 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static("./client/build"))
+app.use(express.static("build"))
 
 const mongoURL = process.env.MONGODB_URL
 mongoose.connect(mongoURL, (err) => {
