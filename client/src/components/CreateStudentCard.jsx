@@ -27,7 +27,7 @@ const CreateStudentCard = ({
         college,
       })
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
         getStudents();
         console.log(res);
       })
@@ -54,7 +54,7 @@ const CreateStudentCard = ({
         college,
       })
       .then((res) => {
-        alert(res.data.message);
+        // alert(res.data.message);
         console.log("Edit button clicked");
         getStudents();
       })

@@ -21,7 +21,7 @@ const Login = () => {
     } catch (err) {
       setError(err.message);
       console.log(error);
-      alert("Check email or password again");
+      // alert("Check email or password again");
     }
   };
 
