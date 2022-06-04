@@ -20,7 +20,6 @@ const StudentsCardList = ({ show, setShow }) => {
   const getStudentIdHandler = (id) => {
     setStudentId(id);
     setShow(true);
-    console.log(id);
   };
 
   useEffect(() => {
@@ -56,7 +55,6 @@ const StudentsCardList = ({ show, setShow }) => {
       .get("http://localhost:5000/students")
       .then((res) => {
         setStudentsList(res.data.data);
-        console.log(studentsList);
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +70,6 @@ const StudentsCardList = ({ show, setShow }) => {
     axios
       .delete(`http://localhost:5000/students/${id}`)
       .then((res) => {
-        console.log("Deleted");
         getStudents();
       })
       .catch((err) => {

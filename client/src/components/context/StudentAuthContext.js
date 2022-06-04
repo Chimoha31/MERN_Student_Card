@@ -37,7 +37,6 @@ export const StudentAuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentstudent) => {
-      console.log("Auth", currentstudent);
       setStudent(currentstudent);
     });
 
