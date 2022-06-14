@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.a342fade.css","mappings":"AAAA;;CAAA,8kGAEA,0xHAFA,wD,CAAA,qB,CAAA,qB,CAAA,oD","sources":["index.scss"],"sourcesContent":["@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"],"names":[],"sourceRoot":""}
