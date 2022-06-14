@@ -25,6 +25,13 @@ app.get("/", (req, res) => {
 
 app.use("/students", StudentRoutes);
 
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT} 🐣`);
 })

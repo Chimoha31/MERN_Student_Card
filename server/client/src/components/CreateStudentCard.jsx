@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-import axios from "axios";
 import AddForm from "./inputForm/AddForm";
 import UpdateForm from "./inputForm/UpdateForm";
+import { axiosInstance } from "../config";
 
 const CreateStudentCard = ({
   setShow,
@@ -19,7 +19,7 @@ const CreateStudentCard = ({
 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axiosInstance
       .post("https://stuentslist-management.herokuapp.com/students", {
         name,
         email,
@@ -45,7 +45,7 @@ const CreateStudentCard = ({
     setShow(false);
     const id = studentId;
     console.log("Clicked");
-    axios
+    await axiosInstance
       .put(`https://stuentslist-management.herokuapp.com/students/${id}`, {
         name,
         email,

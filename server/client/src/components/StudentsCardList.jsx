@@ -1,11 +1,11 @@
 import React, { useEffect, useState, Fragment } from "react";
-import axios from "axios";
 import EditButton from "./buttons/EditButton";
 import { useStudentAuth } from "./context/StudentAuthContext";
 import CreateButton from "./buttons/CreateButton";
 import CreateStudentCard from "./CreateStudentCard";
 import DeleteButton from "./buttons/DeleteButton";
 import Header from "./Header";
+import { axiosInstance } from "../config";
 
 const StudentsCardList = ({ show, setShow }) => {
   const [name, setName] = useState("");
@@ -27,12 +27,12 @@ const StudentsCardList = ({ show, setShow }) => {
     // eslint-disable-next-line
   }, []);
 
-  const getStudent = (id) => {
+  const getStudent = async (id) => {
     getStudentIdHandler(id);
     console.log(studentId);
     setAdd("Update");
     setShow(true);
-    axios
+    await axiosInstance
       .get(`https://stuentslist-management.herokuapp.com/students/${id}`, {
         name,
         email,
@@ -50,8 +50,8 @@ const StudentsCardList = ({ show, setShow }) => {
       });
   };
 
-  const getStudents = () => {
-    axios
+  const getStudents = async () => {
+    await axiosInstance
       .get("https://stuentslist-management.herokuapp.com/students")
       .then((res) => {
         setStudentsList(res.data.data);
@@ -67,7 +67,7 @@ const StudentsCardList = ({ show, setShow }) => {
   };
 
   const handleDelete = async (id) => {
-    axios
+    axiosInstance
       .delete(`https://stuentslist-management.herokuapp.com/students/${id}`)
       .then((res) => {
         getStudents();
