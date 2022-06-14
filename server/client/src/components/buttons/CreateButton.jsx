@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateButton = ({ setShow, setAdd, getStudents }) => {
+const CreateButton = ({ setShow, setAdd }) => {
   const handleShow = () => {
     setShow(true);
     setAdd("Add");

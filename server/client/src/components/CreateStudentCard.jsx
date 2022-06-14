@@ -20,7 +20,7 @@ const CreateStudentCard = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/students", {
+      .post("https://stuentslist-management.herokuapp.com/students", {
         name,
         email,
         phone,
@@ -46,7 +46,7 @@ const CreateStudentCard = ({
     const id = studentId;
     console.log("Clicked");
     axios
-      .put(`http://localhost:5000/students/${id}`, {
+      .put(`https://stuentslist-management.herokuapp.com/students/${id}`, {
         name,
         email,
         phone,

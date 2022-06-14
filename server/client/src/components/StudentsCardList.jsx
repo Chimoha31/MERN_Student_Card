@@ -33,7 +33,7 @@ const StudentsCardList = ({ show, setShow }) => {
     setAdd("Update");
     setShow(true);
     axios
-      .get(`http://localhost:5000/students/${id}`, {
+      .get(`https://stuentslist-management.herokuapp.com/students/${id}`, {
         name,
         email,
         phone,
@@ -52,7 +52,7 @@ const StudentsCardList = ({ show, setShow }) => {
 
   const getStudents = () => {
     axios
-      .get("http://localhost:5000/students")
+      .get("https://stuentslist-management.herokuapp.com/students")
       .then((res) => {
         setStudentsList(res.data.data);
       })
@@ -68,7 +68,7 @@ const StudentsCardList = ({ show, setShow }) => {
 
   const handleDelete = async (id) => {
     axios
-      .delete(`http://localhost:5000/students/${id}`)
+      .delete(`https://stuentslist-management.herokuapp.com/students/${id}`)
       .then((res) => {
         getStudents();
       })
